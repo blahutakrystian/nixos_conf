@@ -48,6 +48,7 @@
     spotify
     swaylock-effects
     swayidle
+                                
   ];
 
    
@@ -67,6 +68,64 @@
     };
   };
 
+  programs.nvf = {
+     enable = true;
+     settings = {
+        vim.theme = {
+           enable = true;
+           name = "catppuccin";
+           style = "mocha";
+        };
+	
+        vim.languages = {
+           nix.enable = true;
+           rust.enable = true;
+           python.enable = true;
+
+           enableLSP = true;
+           enableTreesitter = true;
+        };
+        vim.treesitter = {
+          enable = true;                    # Enable treesitter
+          indent.enable = false;            # Disable indentation
+          highlight.enable = true;          # Keep syntax highlighting
+          incrementalSelection.enable = true; # Enable selection features
+        };
+
+        vim.autocomplete.nvim-cmp.enable = true;
+
+        vim.telescope.enable = true;
+
+        vim.options = {
+           number = true;
+           relativenumber = false;
+
+        };
+
+        # File Explorer (NvimTree)
+        vim.filetree.nvimTree = {
+          enable = true;
+          openOnSetup = true;
+          mappings = {
+            toggle = "<C-n>";
+            focus = "<C-f>";
+            refresh = "<C-r>";
+            findFile = "<C-g>";
+          };          
+          setupOpts = {
+            git.enable = true;
+            actions = {
+              open_file = {
+                quit_on_open = false;
+                resize_window = true;
+              };
+            };
+            filters.dotfiles = false;
+          };
+        };
+        vim.statusline.lualine.enable = true;
+  };
+};
   programs.wezterm = {
 	  enable = true;
 	  extraConfig = ''
@@ -104,7 +163,10 @@
 
 	    return config
 	  '';
-	};  
+  };
+  
+
+
   programs.waybar = {
     enable = true;
     systemd = {
