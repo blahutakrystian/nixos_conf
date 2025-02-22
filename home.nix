@@ -41,6 +41,7 @@
     wl-clipboard       # Clipboard management
     #icon support
     font-awesome
+    nerd-fonts.jetbrains-mono
     material-design-icons
     lm_sensors
     playerctl
@@ -66,6 +67,44 @@
     };
   };
 
+  programs.wezterm = {
+	  enable = true;
+	  extraConfig = ''
+	    local wezterm = require 'wezterm'
+	    local config = {}
+
+	    if wezterm.config_builder then
+	      config = wezterm.config_builder()
+	    end
+
+	    config.color_scheme = 'Catppuccin Mocha'
+
+	    -- Font configuration with explicit family name
+	    config.font = wezterm.font_with_fallback({
+	      {
+		family = 'JetBrainsMono Nerd Font',
+		weight = 'Medium',
+	      },
+	      -- Fallback fonts if needed
+	      'Noto Sans Mono',
+	    })
+	    config.font_size = 13.0
+	    
+	    -- Window configuration
+	    config.window_background_opacity = 0.85
+	    config.window_decorations = "NONE"
+	    config.enable_tab_bar = true
+	    config.hide_tab_bar_if_only_one_tab = true
+	    config.window_padding = {
+	      left = 20,
+	      right = 20,
+	      top = 20,
+	      bottom = 20,
+	    }
+
+	    return config
+	  '';
+	};  
   programs.waybar = {
     enable = true;
     systemd = {
