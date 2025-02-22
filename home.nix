@@ -45,6 +45,8 @@
     lm_sensors
     playerctl
     spotify
+    swaylock-effects
+    swayidle
   ];
 
    
@@ -442,6 +444,7 @@
 	    "$mainMod, P, pseudo,"
 	    "$mainMod, J, togglesplit,"
 	    "$mainMod, S, exec, rofi -show drun -show-icons"
+	    "$mainMod, L, exec, swaylock --clock --indicator --screenshots --effect-blur 7x5"
 	    
 	    # Focus movement
 	    "$mainMod, left, movefocus, l"
@@ -512,8 +515,12 @@
 	exec-once = swww init
 	exec-once = swww img ~/Wallpapers/m_v.png
 	exec-once = waybar
+
+	# Lock screen after 10 minutes of inactivity
+        exec-once = swayidle -w timeout 600 'swaylock --clock --indicator --screenshots --effect-blur 7x5' timeout 1200 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --clock --indicator --screenshots --effect-blur 7x5'
    '';
 
+   
 
   };
   services = {
@@ -525,6 +532,48 @@
     enable = true;
   };
   };
+
+  home.file.".config/swaylock/config".text = ''
+	  clock
+	  screenshots
+	  indicator
+	  effect-blur=7x5
+	  grace=2
+	  fade-in=0.2
+	  
+	  # Colors
+	  key-hl-color=00000066
+	  separator-color=00000000
+	  
+	  inside-color=00000033
+	  inside-clear-color=ffffff00
+	  inside-caps-lock-color=ffffff00
+	  inside-ver-color=ffffff00
+	  inside-wrong-color=ffffff00
+	  
+	  ring-color=ffffff
+	  ring-clear-color=ffffff
+	  ring-caps-lock-color=ffffff
+	  ring-ver-color=ffffff
+	  ring-wrong-color=ffffff
+	  
+	  line-color=00000000
+	  line-clear-color=ffffffFF
+	  line-caps-lock-color=ffffffFF
+	  line-ver-color=ffffffFF
+	  line-wrong-color=ffffffFF
+	  
+	  text-color=ffffff
+	  text-clear-color=ffffff
+	  text-ver-color=ffffff
+	  text-wrong-color=ffffff
+	  
+	  bs-hl-color=ffffff
+	  caps-lock-key-hl-color=ffffffFF
+	  caps-lock-bs-hl-color=ffffffFF
+	  text-caps-lock-color=ffffff
+	'';
+
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

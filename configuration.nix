@@ -139,6 +139,7 @@
     swww
     networkmanagerapplet
     slurp
+    swaylock-effects
     ];
   
   # Firefox
