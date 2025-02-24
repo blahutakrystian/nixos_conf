@@ -1,36 +1,28 @@
 { pkgs, ... }: {
-  # Qt applications should use the GTK theme
   qt = {
-    enable = true;
-    platformTheme.name = "gtk";
+      enable = true;
+      platformTheme.name = "gtk";
   };
-  
-  # Cursor configuration
   home.pointerCursor = {
     gtk.enable = true;
-    # You can use Bibata cursors or another cursor theme
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 20;
   };
-  
-  # GTK theme configuration
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "mauve";
-      };
+      # Use standard Papirus instead of the catppuccin override
+      package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
     };
     theme = {
-      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["mauve"];
-        variant = "mocha";
-        size = "standard";
-      };
+        name = "catppuccin-macchiato-mauve-compact";
+        package = pkgs.catppuccin-gtk.override {
+          accents = ["mauve"];
+          variant = "macchiato";
+          size = "compact";
+        };
     };
     gtk3.extraConfig = {
       Settings = ''
