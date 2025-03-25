@@ -31,6 +31,9 @@
     slurp              # Screen capture
     pavucontrol        # Audio control
     wl-clipboard       # Clipboard management
+    vscodium
+    zed-editor
+
     
     # Fonts and icons
     font-awesome
@@ -46,11 +49,20 @@
     ticktick
     keepassxc
     fastfetch
+    btop
+    peaclock
+    easyeffects
+    tidal-hifi
+    unzip
+    librewolf
+
+    dolphin-emu
     
     # Theming
     catppuccin-gtk
     papirus-icon-theme
   ];
+
 
   # Git configuration
   programs.git = {
@@ -97,6 +109,13 @@
       vim.options = {
         number = true;
         relativenumber = false;
+
+        tabstop = 2;
+        softtabstop = 2;
+        shiftwidth = 2;
+        expandtab = true;
+        smartindent = true;
+        autoindent = true;
       };
 
       # File Explorer (NvimTree)

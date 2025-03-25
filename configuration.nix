@@ -19,6 +19,9 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
+
+  # allows run unpatched dynamic binaries on NixOs (C# dev kit extension doesnt work on vs code)
+  programs.nix-ld.enable = true;
   
   # Select internationalisation properties.
   i18n = {
@@ -78,6 +81,7 @@
       "spotify"
       "ticktick"
       "vscode"
+      "jetbrains.rider"
     ];
 
   # Wayland/Graphics Support

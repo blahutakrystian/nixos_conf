@@ -13,6 +13,13 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    claude-desktop = {
+        url = "github:k3d3/claude-desktop-linux-flake";
+        inputs = {
+            nixpkgs.follows = "nixpkgs";
+            flake-utils.follows = "falek-utils";
+          };
+      };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nvf, catppuccin-nix, ... }: {
