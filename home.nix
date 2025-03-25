@@ -1,7 +1,4 @@
 { lib, config, pkgs, ... }:
-let
-  zedEditor = import ./zed.nix { inherit pkgs; };
-in
 {
   
   imports = [ ./theming.nix ];
@@ -34,12 +31,12 @@ in
     pavucontrol        # Audio control
     wl-clipboard       # Clipboard management
     vscodium
-    zedEditor
+    zed-editor
 
     
     # Fonts and icons
     font-awesome
-    nerd-fonts.jetbrains-mono
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     material-design-icons
     
     # Utilities
