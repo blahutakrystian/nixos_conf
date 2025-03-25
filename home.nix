@@ -1,5 +1,7 @@
 { lib, config, pkgs, ... }:
-
+let
+  zedEditor = import ./zed.nix { inherit pkgs; };
+in
 {
   
   imports = [ ./theming.nix ];
@@ -32,7 +34,7 @@
     pavucontrol        # Audio control
     wl-clipboard       # Clipboard management
     vscodium
-    zed-editor
+    zedEditor
 
     
     # Fonts and icons
