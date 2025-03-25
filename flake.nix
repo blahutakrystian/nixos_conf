@@ -13,6 +13,9 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
     claude-desktop = {
         url = "github:k3d3/claude-desktop-linux-flake";
         inputs = {
@@ -22,7 +25,7 @@
       };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nvf, catppuccin-nix, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nvf, catppuccin-nix, claude-desktop, ... }: {
     nixosConfigurations = {
       nixos-ftw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -38,7 +41,9 @@
 	          ./home.nix
 	          nvf.homeManagerModules.default 
                   catppuccin-nix.homeManagerModules.catppuccin
-	       ];
+	          ];
+            # Add Claude Desktop to your home packages
+            home.packages = [ claude-desktop.packages.x86_64-linux.claude-desktop ];
             };
 
 
