@@ -17,7 +17,7 @@
       url = "github:numtide/flake-utils";
     };
     claude-desktop = {
-        url = "github:k3d3/claude-desktop-linux-flake";
+        url = "github:blahutakrystian/claude-desktop-linux-flake";
         inputs = {
             nixpkgs.follows = "nixpkgs";
             flake-utils.follows = "flake-utils";
@@ -25,7 +25,9 @@
       };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nvf, catppuccin-nix, claude-desktop, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nvf, catppuccin-nix,
+  claude-desktop, 
+  ... }: {
     nixosConfigurations = {
       nixos-ftw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -36,16 +38,16 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
-	    home-manager.users.krystian = { ... }: {
+	          home-manager.users.krystian = {  ... }: {
                imports = [
 	          ./home.nix
 	          nvf.homeManagerModules.default 
                   catppuccin-nix.homeManagerModules.catppuccin
 	          ];
+
             # Add Claude Desktop to your home packages
             home.packages = [ claude-desktop.packages.x86_64-linux.claude-desktop ];
             };
-
 
 
             # Optionally, use home-manager.extraSpecialArgs to pass
